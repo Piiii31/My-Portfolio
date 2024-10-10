@@ -23,6 +23,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+      <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+      (function(){
+          emailjs.init({
+            publicKey: "4ZUkBUJ1PgrmpcPmD",
+          });
+      })();
+    </script>
 </head>
 
 <body>
@@ -1072,27 +1082,64 @@
         </section>
 
         <section class="contact-form">
-
           <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
+        
+          <form id="contact-form" class="form">
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required>
+              <input type="email" name="email" class="form-input" placeholder="Email address" required>
             </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
+            <textarea name="message" class="form-input" placeholder="Your Message" required></textarea>
+        
+            <button class="form-btn" type="submit">
               <ion-icon name="paper-plane"></ion-icon>
               <span>Send Message</span>
             </button>
-
           </form>
-
         </section>
+
+        <div id="success-modal" class="modal hidden">
+          <div class="modal-content">
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="loading hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                class="spinner"
+              >
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#ffdc6c" stroke-width="2" />
+                <path fill="#ffdc6c" d="M12 2a10 10 0 0 0 0 20V2z" />
+              </svg>
+              <p>Sending...</p>
+            </div>
+        
+            <!-- Success Message -->
+            <div id="success-message" class="hidden">
+              <!-- SVG for Success Icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                fill="none"
+                viewBox="0 0 24 24"
+                class="success-icon"
+              >
+                <circle cx="12" cy="12" r="10" fill="#ffdc6c" />
+                <path stroke="#fff" stroke-width="2" d="M8 12l2 2 4-4" />
+              </svg>
+              <p>Email sent successfully!</p>
+            </div>
+        
+            <button id="close-modal" class="close-modal">Close</button>
+          </div>
+        </div>
+        
+        
+        
+        
+        
 
       </article>
 

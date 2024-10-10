@@ -157,3 +157,52 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('contact-form');
+  const modal = document.getElementById('success-modal');
+  const loadingIndicator = document.getElementById('loading-indicator');
+  const successMessage = document.getElementById('success-message');
+  const closeModalButton = document.getElementById('close-modal');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the form from submitting the default way
+
+    // Get form values
+    const fullname = form.fullname.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    // Define the EmailJS template parameters
+    const templateParams = {
+      name: fullname,
+      email: email,
+      message: message,
+    };
+
+    // Show loading indicator and hide success message
+    loadingIndicator.classList.remove('hidden');
+    successMessage.classList.add('hidden');
+    modal.classList.remove('hidden'); // Show the modal
+
+    // Send email using EmailJS
+    emailjs.send('service_o65t3nk', 'template_h1cw4qu', templateParams)
+      .then(function (response) {
+        loadingIndicator.classList.add('hidden'); // Hide loading indicator
+        successMessage.classList.remove('hidden'); // Show success message
+        form.reset(); // Clear the form after successful submission
+      }, function (error) {
+        alert('Failed to send message.');
+        console.log('Failed to send email:', error);
+        modal.classList.add('hidden'); // Hide the modal on error
+      });
+  });
+
+  // Close the modal when the Close button is clicked
+  closeModalButton.addEventListener('click', function () {
+    modal.classList.add('hidden'); // Hide the modal
+  });
+});
+
+
+
